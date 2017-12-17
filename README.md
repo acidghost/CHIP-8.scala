@@ -8,3 +8,9 @@
 - https://github.com/mikezaby/chip-8.rs
 - https://github.com/massung/CHIP-8
 - https://github.com/craigthomas/Chip8Java
+
+#### TODO
+- Fix unsigned operations (consider implementing unsigned types as in https://github.com/non/spire)
+- Look into https://monix.io/ for concurrency
+- Look into http://atnos-org.github.io/eff/ to refactor State stepping
+- Separate parsing from interpretation as much as possible
