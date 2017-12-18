@@ -13,4 +13,4 @@
 - Fix unsigned operations (consider implementing unsigned types as in https://github.com/non/spire)
 - Look into https://monix.io/ for concurrency
 - Look into http://atnos-org.github.io/eff/ to refactor State stepping
-- Separate parsing from interpretation as much as possible
+- Separate parsing from interpretation as much as possible (http://www.lihaoyi.com/fastparse/#ByteParsers)
