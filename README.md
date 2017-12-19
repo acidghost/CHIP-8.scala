@@ -10,7 +10,12 @@
 - https://github.com/craigthomas/Chip8Java
 
 #### TODO
-- Fix unsigned operations (consider implementing unsigned types as in https://github.com/non/spire)
-- Look into https://monix.io/ for concurrency
-- Look into http://atnos-org.github.io/eff/ to refactor State stepping
-- Separate parsing from interpretation as much as possible (http://www.lihaoyi.com/fastparse/#ByteParsers)
+&#x2611; Fix unsigned operations (consider implementing unsigned types as in https://github.com/non/spire)
+
+&#x2610; Write some unit tests
+
+&#x2610; Look into https://monix.io/ for concurrency
+
+&#x2610; Look into http://atnos-org.github.io/eff/ to refactor State stepping
+
+&#x2610; Separate parsing from interpretation as much as possible (http://www.lihaoyi.com/fastparse/#ByteParsers)

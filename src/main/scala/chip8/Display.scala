@@ -1,6 +1,7 @@
 package chip8
 
 import chip8.Display.Position
+import chip8.unsigned.UByte
 
 import scala.annotation.tailrec
 
@@ -26,8 +27,8 @@ case class Display(
 
   def clear: Display = copy(data = Vector.fill(width, height)(false))
 
-  def draw(x: Short, y: Short, sprite: Seq[Byte]): (Byte, Display) = {
-    @tailrec def draw_(i: Int, j: Int, coll: Byte, data: Vector[Vector[Boolean]]): (Byte, Display) = {
+  def draw(x: Short, y: Short, sprite: Seq[UByte]): (UByte, Display) = {
+    @tailrec def draw_(i: Int, j: Int, coll: UByte, data: Vector[Vector[Boolean]]): (UByte, Display) = {
       if (i >= sprite.length)
         (coll, copy(data = data))
       else {
@@ -36,15 +37,15 @@ case class Display(
         if (xi >= width || yj >= height)
           draw_(if (j == 7) i + 1 else i, (j + 1) % 8, coll, data)
         else {
-          val mask = 1 << j
+          val mask = UByte(1) << j
           val bit = (sprite(i) & mask) == mask
-          val coll_ = if (data(xi)(yj)) 1: Byte else coll
+          val coll_ = if (data(xi)(yj)) UByte(1) else coll
           val data_ = data.updated(xi, data(xi).updated(yj, bit))
           draw_(if (j == 7) i + 1 else i, (j + 1) % 8, coll_, data_)
         }
       }
     }
-    draw_(0, 0, 0, data)
+    draw_(0, 0, UByte(0), data)
   }
 
 }

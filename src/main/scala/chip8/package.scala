@@ -1,3 +1,5 @@
+import chip8.unsigned.{UByte, UShort}
+
 package object chip8 {
 
   val startAddress: Short = 0x200
@@ -5,11 +7,14 @@ package object chip8 {
   val screenSize = (64, 32)
 
   implicit class ShortOps(short: Short) {
-    def <+>(i: Int): Short = (short + i).toShort
-    def <->(i: Int): Short = (short - i).toShort
-    def <*>(i: Int): Short = (short * i).toShort
-    def <&>(i: Int): Short = (short & i).toShort
-    def <>>(i: Int): Short = (short >> i).toShort
+    def toUByte: UByte = UByte(short)
+    def toUShort: UShort = UShort(short)
   }
+
+  implicit class IntOps(int: Int) {
+    def toUByte: UByte = UByte(int)
+    def toUShort: UShort = UShort(int)
+  }
+
 
 }

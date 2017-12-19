@@ -1,13 +1,14 @@
 package chip8
 
 import chip8.Registers.Register
+import chip8.unsigned.UByte
 
 
-private case class Registers(private val data: Vector[Byte]) {
+private case class Registers(private val data: Vector[UByte]) {
 
-  def apply(register: Register): Byte = data(register.index)
+  def apply(register: Register): UByte = data(register.index)
 
-  def update(register: Register, value: Byte): Registers =
+  def update(register: Register, value: UByte): Registers =
     copy(data = data.updated(register.index, value))
 
 }
@@ -15,7 +16,7 @@ private case class Registers(private val data: Vector[Byte]) {
 
 private object Registers {
 
-  def empty = Registers(Vector.fill(16)(0))
+  def empty = Registers(Vector.fill(16)(UByte(0)))
 
   def fromNum(n: Short): Option[Register] = n match {
     case 0  => Some(V0)

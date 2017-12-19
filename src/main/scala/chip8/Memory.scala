@@ -1,14 +1,18 @@
 package chip8
 
+import chip8.unsigned.{UByte, UShort}
+import chip8.unsigned.UByte.UByteIsNumeric
 
-private case class Memory(private val data: Vector[Byte]) {
 
-  def apply(idx: Short): Byte = data(idx)
+private case class Memory(private val data: Vector[UByte]) {
 
-  def update(idx: Short, value: Byte): Memory =
+  def apply(idx: Int): UByte = data(idx)
+  def apply(idx: UShort): UByte = data(idx.toInt)
+
+  def update(idx: Int, value: UByte): Memory =
     copy(data = data.updated(idx, value))
 
-  def append(value: Byte): Memory = copy(data = data :+ value)
+  def append(value: UByte): Memory = copy(data = data :+ value)
 
   def slice(from: Int, to: Int) = data.slice(from, to)
 
@@ -17,16 +21,16 @@ private case class Memory(private val data: Vector[Byte]) {
 
 private object Memory {
 
-  def empty = Memory(Vector.fill(availableMemory)(0))
+  def empty = Memory(Vector.fill(availableMemory)(UByte(0)))
 
   def withFontSet = fontSet.foldLeft(Memory.empty)(_ append _)
 
   def load(bytes: Seq[Byte], at: Short = startAddress) =
     bytes.zipWithIndex.foldLeft(Memory.withFontSet) {
-      case (mem, (b, i)) => mem(at <+> i) = b
+      case (mem, (b, i)) => mem(at + i) = UByte(b)
     }
 
-  val fontSet: Seq[Byte] = Seq(
+  val fontSet: Seq[UByte] = Seq(
     0xF0, 0x90, 0x90, 0x90, 0xF0,       // 0
     0x20, 0x60, 0x20, 0x20, 0x70,       // 1
     0xF0, 0x10, 0xF0, 0x80, 0xF0,       // 2
@@ -43,6 +47,6 @@ private object Memory {
     0xE0, 0x90, 0x90, 0x90, 0xE0,       // D
     0xF0, 0x80, 0xF0, 0x80, 0xF0,       // E
     0xF0, 0x80, 0xF0, 0x80, 0x80        // F
-  ) map (_.toByte)
+  ) map UByteIsNumeric.fromInt
 
 }

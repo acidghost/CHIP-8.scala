@@ -1,12 +1,14 @@
 package chip8
 
-private case class Stack(private val data: Vector[Short]) {
+import chip8.unsigned.UShort
 
-  def push(address: Short): Stack = copy(data = data :+ address)
+private case class Stack(private val data: Vector[UShort]) {
 
-  def top: Option[Short] = data.lastOption
+  def push(address: UShort): Stack = copy(data = data :+ address)
 
-  def pop: Option[(Short, Stack)] = top map ((_, copy(data = data.init)))
+  def top: Option[UShort] = data.lastOption
+
+  def pop: Option[(UShort, Stack)] = top map ((_, copy(data = data.init)))
 
 }
 
