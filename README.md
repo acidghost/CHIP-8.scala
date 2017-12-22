@@ -8,6 +8,7 @@
 - https://github.com/mikezaby/chip-8.rs
 - https://github.com/massung/CHIP-8
 - https://github.com/craigthomas/Chip8Java
+- https://gist.github.com/pandemonium
 
 #### TODO
 &#x2611; Fix unsigned operations (consider implementing unsigned types as in https://github.com/non/spire)
